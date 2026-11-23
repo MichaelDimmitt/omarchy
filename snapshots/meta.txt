@@ -2,7 +2,12 @@ date:      2026-11-23
 omarchy:   4.5.0-3
 kernel:    7.2.15-1-omarchy
 platform:  x86
-cpu:       AMD Ryzen AI 7 350 w/ Radeon 860M
+computer:  Framework Laptop 13 (AMD Ryzen AI 300 Series) rev A7
+bios:      INSYDE Corp. 04.02 (06/09/2026)
+cpu:       AMD Ryzen AI 7 350 w/ Radeon 860M (16 threads)
+memory:    31 GB
+storage:   1.8T WD_BLACK SN7100 2TB
+display:   eDP-1 2880x1920@120 scale 1.6
 gpu:       Advanced Micro Devices, Inc. [AMD/ATI] Krackan [Radeon 840M / 860M Graphics] (rev c2)
 mise:      2026.11.0
 sync-dbs:  0 online repo DBs present (0 = pacman never synced)

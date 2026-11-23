@@ -7,7 +7,15 @@ Snapshot taken **2026-11-22**.
 | Omarchy | `omarchy 4.5.0-3`, installed 2026-11-04 |
 | Kernel | `linux-omarchy 7.2.15-1` (BORE CPU scheduler, ADIOS I/O scheduler) |
 | Platform | `x86` (per `omarchy-hw-platform`) |
-| Hardware | AMD Ryzen AI 7 350, Radeon 860M (Krackan) |
+| Computer | **Framework Laptop 13 Pro**. Firmware reports `Framework Laptop 13 (AMD Ryzen AI 300 Series)`, board revision A7, SKU `FRANWCCP07` |
+| BIOS | INSYDE `04.02` (2026-06-09) |
+| CPU | AMD Ryzen AI 7 350, 8 cores / 16 threads |
+| GPU | Radeon 860M integrated (Krackan), driver `vulkan-radeon` |
+| Memory | 32 GB RAM, plus 30.6 GB zram swap |
+| Storage | 2 TB WD_BLACK SN7100 NVMe (btrfs + snapper) |
+| Display | built-in 13.5" 2880×1920 @ 120 Hz (3:2), Hyprland scale 1.6 |
+| Wireless | MediaTek MT7925 (RZ717), Wi-Fi 7 160 MHz + Bluetooth |
+| Keyboard | Framework keyboard. `fn esc` toggles Fn lock, and **no light shows its state**: test with the brightness key (see `keybindings.md`) |
 | Package managers present | pacman, yay (AUR), mise, plus npm, uv and gem through mise or the system |
 | Not present | flatpak, snap, brew, nix, pipx, cargo/rustup, fwupd |
 

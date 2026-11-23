@@ -278,7 +278,7 @@ Live sources, in case this file goes stale:
 Full list: `/usr/share/omarchy/default/xcompose`
 
 ## gotchas found on this machine
-1) **The `¨michael` typo:** `~/.config/hypr/input.lua` sets `kb_variant = "intl"`. On US-international, `"` and `'` are dead keys, so `"` then `m` typed `¨m`. To get a plain quote, press `"` then `space`. To stop it, drop `kb_variant`.
+1) ✅ **Fixed 2026-11-23: the `¨michael` typo.** `~/.config/hypr/input.lua` had `kb_variant = "intl"`. On US-international, `"` and `'` are dead keys, so `"` then `m` typed `¨m`. The line is now commented out (backup: `~/.config/hypr/input.lua.bak.*`), Hyprland was reloaded, and fcitx5 was restarted with `omarchy restart xcompose`, because fcitx5's virtual keyboard keeps the old keymap until it restarts. Check with `hyprctl devices -j | jq '.keyboards[].active_keymap'`; every keyboard should say `English (US)`. To bring back accents on demand, use the compose key instead (`shift caps lock`, then e.g. `' e` → é).
 2) **Overloaded alt keys:** `left alt + right alt` switches keyboard layout (us/dk/eu), and holding `alt + right alt` also starts push-to-talk dictation. Pressing both Alts may do both.
 3) **`super c` / `super v` vs `ctrl c`:** use `super c` / `super v` everywhere, including terminals. In a terminal, `ctrl c` still sends interrupt.
 4) **`ctrl space` is the leader in both tmux and herdr.** Running one inside the other means the outer one catches the leader, so press it twice (or use `ctrl b` for tmux). Omarchy binds `ctrl space` to "direct input" so fcitx5 passes it through to the terminal and doesn't eat it.

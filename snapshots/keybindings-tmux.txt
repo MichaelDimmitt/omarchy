@@ -1,0 +1,43 @@
+PREFIX                           → CTRL + SPACE / CTRL + B
+PREFIX + ?                       → Show Tmux keybindings
+PREFIX + C                       → Create session
+PREFIX + K                       → Kill session
+PREFIX + N                       → Next session
+PREFIX + P                       → Previous session
+PREFIX + R                       → Rename session
+PREFIX + c                       → Create window
+PREFIX + h                       → Split pane vertically
+PREFIX + k                       → Kill window
+PREFIX + q                       → Reload configuration
+PREFIX + r                       → Rename window
+PREFIX + v                       → Split pane horizontally
+PREFIX + x                       → Kill pane
+PREFIX + CTRL + SPACE            → Send prefix
+ALT + ENTER                      → Split pane vertically
+ALT + ESCAPE                     → Kill pane
+ALT + 1                          → Switch to window 1
+ALT + 2                          → Switch to window 2
+ALT + 3                          → Switch to window 3
+ALT + 4                          → Switch to window 4
+ALT + 5                          → Switch to window 5
+ALT + 6                          → Switch to window 6
+ALT + 7                          → Switch to window 7
+ALT + 8                          → Switch to window 8
+ALT + 9                          → Switch to window 9
+ALT + UP                         → Previous session
+ALT + DOWN                       → Next session
+ALT + LEFT                       → Previous window
+ALT + RIGHT                      → Next window
+CTRL + ALT + UP                  → Focus pane up
+CTRL + ALT + DOWN                → Focus pane down
+CTRL + ALT + LEFT                → Focus pane left
+CTRL + ALT + RIGHT               → Focus pane right
+ALT + SHIFT + ENTER              → Split pane horizontally
+ALT + SHIFT + LEFT               → Move window left
+ALT + SHIFT + RIGHT              → Move window right
+CTRL + ALT + SHIFT + UP          → Resize pane up
+CTRL + ALT + SHIFT + DOWN        → Resize pane down
+CTRL + ALT + SHIFT + LEFT        → Resize pane left
+CTRL + ALT + SHIFT + RIGHT       → Resize pane right
+COPY MODE + v                    → Begin selection
+COPY MODE + y                    → Copy selection

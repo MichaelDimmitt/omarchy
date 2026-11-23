@@ -1,0 +1,9 @@
+date:      2026-11-23
+omarchy:   4.5.0-3
+kernel:    7.2.15-1-omarchy
+platform:  x86
+cpu:       AMD Ryzen AI 7 350 w/ Radeon 860M
+gpu:       Advanced Micro Devices, Inc. [AMD/ATI] Krackan [Radeon 840M / 860M Graphics] (rev c2)
+mise:      2026.11.0
+sync-dbs:  0 online repo DBs present (0 = pacman never synced)
+last -Syu: never

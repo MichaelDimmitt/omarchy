@@ -1,0 +1,5 @@
+claude                      2.1.323
+claude                      2.1.330                        /etc/mise/conf.d/omarchy-tools.toml  latest
+gh                          2.104.0                        /etc/mise/conf.d/omarchy-tools.toml  latest
+node                        26.13.1                        /etc/mise/conf.d/omarchy-tools.toml  latest
+uv                          0.13.9                         /etc/mise/conf.d/omarchy-tools.toml  latest

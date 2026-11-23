@@ -1,0 +1,80 @@
+#!/bin/bash
+# Regenerate snapshots/ from the live machine. Read-only: no sudo, no installs.
+# Usage: bin/refresh            then review with: git diff --stat snapshots/
+set -uo pipefail
+
+repo=$(cd "$(dirname "$0")/.." && pwd)
+out="$repo/snapshots"
+defaults=/usr/share/omarchy/install
+mkdir -p "$out"
+
+# pacman warns on every call when sync DBs are missing; keep that out of the files.
+pac() { pacman "$@" 2>/dev/null; }
+strip_ansi() { sed 's/\x1b\[[0-9;?]*[A-Za-z]//g'; }
+section() { printf '\n== %s\n' "$1"; }
+
+echo "Refreshing snapshots in $out ..."
+
+# --- meta -------------------------------------------------------------------
+{
+  echo "date:      $(date +%F)"
+  echo "omarchy:   $(pac -Q omarchy | awk '{print $2}')"
+  echo "kernel:    $(uname -r)"
+  echo "platform:  $(omarchy-hw-platform 2>/dev/null)"
+  echo "cpu:       $(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2 | xargs)"
+  echo "gpu:       $(lspci | grep -iE 'vga|3d|display' | cut -d: -f3- | xargs)"
+  echo "mise:      $(mise --version 2>/dev/null | awk '{print $1}')"
+  sync_dbs=$(find /var/lib/pacman/sync -name '*.db' ! -name offline.db 2>/dev/null | wc -l)
+  echo "sync-dbs:  $sync_dbs online repo DBs present (0 = pacman never synced)"
+  last=$(grep -E 'starting full system upgrade' /var/log/pacman.log | tail -1 | cut -c2-11)
+  echo "last -Syu: ${last:-never}"
+} > "$out/meta.txt"
+
+# --- pacman vs omarchy defaults ----------------------------------------------
+tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
+omarchy-pkg-defaults 2>/dev/null | sort -u > "$tmp/defaults"
+grep -hv '^\s*#' "$defaults"/omarchy-base.packages "$defaults"/omarchy-other.packages \
+  | sed 's/\s.*//' | grep -v '^$' | sort -u > "$tmp/all-lists"
+pac -Qqe | sort > "$out/packages-explicit.txt"
+
+{
+  echo "# Explicitly installed, not in any omarchy *.packages list"
+  comm -23 "$out/packages-explicit.txt" "$tmp/all-lists"
+  section "Omarchy defaults for this platform that are NOT installed"
+  while read -r p; do pac -T "$p" >/dev/null || echo "$p"; done < "$tmp/defaults"
+  section "Orphans (pacman -Qdtq)"
+  pac -Qdtq
+} > "$out/packages-diff.txt"
+
+# --- pending updates ---------------------------------------------------------
+{
+  echo "# pacman repo updates (checkupdates)"
+  checkupdates --nocolor 2>/dev/null || echo "(none, or offline)"
+  section "Foreign / AUR packages (checked against fresh DB)"
+  db=/tmp/checkup-db-${UID}
+  [[ -d $db ]] && pacman -Qqm --dbpath "$db" 2>/dev/null
+  section "mise outdated (installed tools only)"
+  mise outdated 2>/dev/null | grep -v '\[MISSING\]' || true
+} > "$out/updates.txt"
+
+# --- mise --------------------------------------------------------------------
+# `mise ls` only reads state; it does not trigger lazy installs.
+mise ls 2>/dev/null | grep -v '(lazy)' > "$out/mise-installed.txt"
+mise ls 2>/dev/null | grep '(lazy)' | awk '{print $1}' > "$out/mise-lazy.txt"
+
+# --- keybindings -------------------------------------------------------------
+omarchy menu keybindings --print 2>/dev/null | strip_ansi > "$out/keybindings-hyprland.txt"
+omarchy-menu-tmux-keybindings --print 2>/dev/null | strip_ansi > "$out/keybindings-tmux.txt"
+omarchy-menu-herdr-keybindings --print 2>/dev/null | strip_ansi > "$out/keybindings-herdr.txt"
+
+# --- user overrides of omarchy configs (hypr only; keep personal data out) ---
+{
+  echo "# ~/.config/hypr files that differ from /usr/share/omarchy/config/hypr"
+  for f in input bindings; do
+    section "$f.lua (diff: user vs default template)"
+    diff -u "/usr/share/omarchy/config/hypr/$f.lua" "$HOME/.config/hypr/$f.lua" \
+      | tail -n +3 || true
+  done
+} > "$out/hypr-overrides.txt"
+
+echo "Done. Next: git diff --stat snapshots/ && git diff snapshots/"

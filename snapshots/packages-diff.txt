@@ -1,0 +1,15 @@
+# Explicitly installed, not in any omarchy *.packages list
+amd-ucode
+efibootmgr
+intel-ucode
+mkinitcpio
+neovim
+omarchy
+omarchy-keyring
+omarchy-settings
+openssh
+sudo
+
+== Omarchy defaults for this platform that are NOT installed
+
+== Orphans (pacman -Qdtq)

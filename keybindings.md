@@ -271,6 +271,32 @@ Live sources, in case this file goes stale:
 2. `esc :wq` - escape write and quit
 3. ctrl v - enter visual block mode
 
+## chromium commands
+`super shift b` - open chromium. On linux, mac `command` becomes `ctrl`.
+* move between tabs<br/>
+`ctrl tab` / `ctrl shift tab` - next / previous tab<br/>
+`ctrl page down` / `ctrl page up` - next / previous tab (same thing)<br/>
+`ctrl 1..8` - jump to tab 1..8<br/>
+`ctrl 9` - jump to the last tab<br/>
+`ctrl shift a` - search open tabs by name<br/>
+`ctrl shift page down` / `ctrl shift page up` - move current tab right / left<br/>
+
+* open and close tabs<br/>
+`ctrl t` - new tab<br/>
+`ctrl w` - close tab<br/>
+`ctrl shift t` - reopen last closed tab<br/>
+`ctrl n` - new window, `ctrl shift n` - new incognito window<br/>
+
+* within a tab<br/>
+`ctrl l` - focus address bar<br/>
+`alt left` / `alt right` - back / forward<br/>
+`ctrl f` - find on page<br/>
+`ctrl r` - reload<br/>
+
+* gotcha<br/>
+`alt tab` is taken by hyprland (switches windows), so use `ctrl tab` for tabs.<br/>
+To move between chromium windows, use `alt tab` or `super arrow`.<br/>
+
 ## compose key (shift caps lock, then type the sequence)
 `compose m s` 😄, `m c` 😂, `m l` 😍, `m h` ❤️, `m y` 👍, `m n` 👎, `m p` 🙏, `m o` 👌, `m x` 🎉, `m 1` 💯<br/>
 `compose space space` - em dash —<br/>
@@ -284,5 +310,4 @@ Full list: `/usr/share/omarchy/default/xcompose`
 4) **`ctrl space` is the leader in both tmux and herdr.** Running one inside the other means the outer one catches the leader, so press it twice (or use `ctrl b` for tmux). Omarchy binds `ctrl space` to "direct input" so fcitx5 passes it through to the terminal and doesn't eat it.
 
 ## questions remaining for me to add to
-1) chromium shortcuts on linux (mostly mac `command` → `ctrl`)
-2) vscode / cursor, if installed later
+1) vscode / cursor, if installed later

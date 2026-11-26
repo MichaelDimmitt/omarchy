@@ -309,5 +309,7 @@ Full list: `/usr/share/omarchy/default/xcompose`
 3) **`super c` / `super v` vs `ctrl c`:** use `super c` / `super v` everywhere, including terminals. In a terminal, `ctrl c` still sends interrupt.
 4) **`ctrl space` is the leader in both tmux and herdr.** Running one inside the other means the outer one catches the leader, so press it twice (or use `ctrl b` for tmux). Omarchy binds `ctrl space` to "direct input" so fcitx5 passes it through to the terminal and doesn't eat it.
 
+5) **There's no "undo" for closing a window.** `super w` / `super q` close it for good (`super k` only opens the keybindings menu). Chromium can bring it back: `super shift b` to relaunch, then `ctrl shift t` (repeat to go further back), or `ctrl h` → "Recently closed". Chromium is on the default New Tab startup page, so tabs aren't restored automatically. Set `chrome://settings/onStartup` → "Continue where you left off" to restore them. A closed terminal is gone, so run terminal work in tmux (`super alt return`) or herdr (`super ctrl return`), where closing the window only detaches and `tmux attach` brings it back.
+
 ## questions remaining for me to add to
 1) vscode / cursor, if installed later
